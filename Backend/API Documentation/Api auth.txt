@@ -1,10 +1,10 @@
-1.  "Авторизация пользователя  - POST /auth
+1. Авторизация пользователя  - POST /auth
    Body
    {
       "login"": "Test",
       "password"": "Test"
    }
-	"Возвращает конкретного пользователя
+	Возвращает конкретного пользователя
     {
       "id": 0,
       "login": "login",
@@ -13,28 +13,7 @@
       "role": "user",
       "ts": "2023-08-31T13:34:02.907231700"
     }
-Status code
+Status code - 200/ok  -  успешная авторизация
+Status code - 500     -  ошибка авторизации
+Status code - 404     -  ошибка запроса
 
-2.  Добавление записи в Books - POST /admin/insertBook
-  Body
-    {
-        "id": 1,
-        "metabook": 1,
-        "language": 1,
-        "title": "Вечные мгновения",
-        "author": "1",
-        "translation_date": 1954,
-        "translator": 2,
-        "is_ready": true,
-        "is_visible": true,
-        "owner": 1
-    }
-	"Возвращает конкретного пользователя
-    ""id"": 0,
-    ""login"": ""login"",
-    ""password"": """",
-    ""token"": ""MRuXS…."",
-    ""role"": ""user"",
-    ""ts"": ""2023-08-31T13:34:02.907231700""
-				
-Status code	

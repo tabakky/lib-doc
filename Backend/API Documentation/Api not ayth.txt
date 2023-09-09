@@ -1,0 +1,16 @@
+1. Получение списка языков - GET /languages
+
+Возвращает список доступных языков в системе.
+    {
+        "id": 1,
+        "self_name": "English",
+        "english": "English",
+        "russian": "Английский",
+        "german": "Englisch",
+        "french": "Anglais",
+        "spanish": "Inglés",
+        "italian": "Inglese"
+    }
+Status code - 200/Ok   - успешно
+Status code - 500      - ошибка сервера
+Status code - 404      - ошибка запроса
