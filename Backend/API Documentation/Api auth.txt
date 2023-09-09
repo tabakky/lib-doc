@@ -1,0 +1,19 @@
+1. Авторизация пользователя  - POST /auth
+   Body
+   {
+      "login"": "Test",
+      "password"": "Test"
+   }
+	Возвращает конкретного пользователя
+    {
+      "id": 0,
+      "login": "login",
+      "password": "",
+      "token": "MRuXS….",
+      "role": "user",
+      "ts": "2023-08-31T13:34:02.907231700"
+    }
+Status code - 200/ok  -  успешная авторизация
+Status code - 500     -  ошибка авторизации
+Status code - 404     -  ошибка запроса
+
