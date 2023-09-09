@@ -1,16 +1,416 @@
-1. Получение списка языков - GET /languages
+ 1. GET /languages - Получение списка языков
 
-Возвращает список доступных языков в системе.
-    {
-        "id": 1,
-        "self_name": "English",
-        "english": "English",
-        "russian": "Английский",
-        "german": "Englisch",
-        "french": "Anglais",
-        "spanish": "Inglés",
-        "italian": "Inglese"
+Возвращает список доступных языков в системе {json}
+  [
+   {
+     "id": 1,
+     "self_name": "English",
+     "english": "English",
+     "russian": "Английский",
+     "german": "Englisch",
+     "french": "Anglais",
+     "spanish": "Inglés",
+     "italian": "Inglese"
+   }
+  ]
+Status code 200/Ok - успешно
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+
+
+2. GET /authors - Получение списка авторов
+	
+Возвращает список всех авторов в системе {json}
+ [
+  {
+    "id": 1,
+    "english_name": "Joan Ramon Jimenez",
+    "russian_name": "Джоан Рамон Хименес",
+    "german_name": "Joan Ramon Jimenez",
+    "french_name": "Joan Ramon Jimenez",
+    "original_language": 1,
+    "birth_date": 1856,
+    "death_date": 1921,
+    "is_author": true,
+    "is_translator": true,
+    "owner": 1
+   }
+ ]
+Status code 200/Ok - успешно
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+
+3. GET /author/:id - Получение информации об авторе по идентификатору
+
+Возвращает информацию о конкретном авторе {json}
+   {
+    "id": 1,
+    "english_name": "Joan Ramon Jimenez",
+    "russian_name": "Джоан Рамон Хименес",
+    "german_name": "Joan Ramon Jimenez",
+    "french_name": "Joan Ramon Jimenez",
+    "original_language": 1,
+    "birth_date": 1856,
+    "death_date": 1921,
+    "is_author": true,
+    "is_translator": true,
+    "owner": 1
+   }
+Status code 200/Ok - успешно
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+
+	
+4. GET /chapters/:id - Получение информации о главе по идентификатору
+
+Возвращает информацию о конкретной главе книги {json}
+ [
+   {
+    "id": 1,
+    "book": 1,
+    "title": "отцы",
+    "head": 1,
+    "txt": "текст"
     }
-Status code - 200/Ok   - успешно
-Status code - 500      - ошибка сервера
-Status code - 404      - ошибка запроса
+  ]
+Status code 200/Ok - успешно
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+
+
+5. GET /book/:id/language/:lang - Получение книги на указанном языке
+
+Возвращает информацию о книге {json}
+   {
+    "id": 3,
+    "metabook": 1,
+    "language": 2,
+    "title": "Собачье сердце ",
+    "author": "Михаил Булгаков ",
+    "translation_date": 0,
+    "translator": 1,
+    "is_ready": true,
+    "is_visible": true,
+    "owner": 3
+   }
+Status code 200/Ok - успешно
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+
+
+6. GET /book/:bId/chapter/:chId - Получение главы книги
+
+Возвращает информацию о конкретной главе книги {json}
+  {
+    "id": 2,
+    "book": 2,
+    "title": "мгновения",
+    "head": 1,
+    "txt": "текст23"
+  }
+Status code 200/Ok - успешно
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+
+
+7. GET /book/:id - Получение информации о книге по идентификатор
+
+Возвращает информацию о конкретной книге {json}
+  {
+    "id": 1,
+    "metabook": 1,
+    "language": 1,
+    "title": "Вечные мгновения",
+    "author": "1",
+    "translation_date": 1954,
+    "translator": 2,
+    "is_ready": true,
+    "is_visible": true,
+    "owner": 1
+  }
+Status code 200/Ok - успешно
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+
+	
+8. GET /books/:author - Получение списка книг автора
+
+Возвращает список всех книг указанного автора {json}
+  {
+    "id": 4,
+    "metabook": 1,
+    "language": 1,
+    "title": "The heart of a dog",
+    "author": "Michail Bulgakov",
+    "translation_date": 0,
+    "translator": 1,
+    "is_ready": false,
+    "is_visible": false,
+    "owner": 3
+   }
+Status code 200/Ok - успешно
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+
+
+9. GET /bookF/:id - Получение полной информации о книге
+	
+Возвращает полную информацию о конкретной книге {json}
+   {
+    "book": {
+        "id": 1,
+        "metabook": 1,
+        "language": 1,
+        "title": "Вечные мгновения",
+        "author": "1",
+        "translation_date": 1954,
+        "translator": 2,
+        "is_ready": true,
+        "is_visible": true,
+        "owner": 1
+   },
+    "chapters": [
+        {
+            "id": 1,
+            "book": 1,
+            "title": "отцы",
+            "head": 1,
+            "txt": "текст"
+        },
+        {
+            "id": 11,
+            "book": 1,
+            "title": "Глава 2 ",
+            "head": 1,
+            "txt": "Текст 232323\n"
+        }
+      ]
+    }
+Status code 200/Ok - успешно
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+
+	
+10. GET /metabookF/:bookId - Получение полной информации о метакниге
+	
+Возвращает полную информацию о конкретной метакниге {json}
+  {
+    "metabook": {
+        "id": 1,
+        "author": 1,
+        "language": 1,
+        "title": "Вечные мгновения",
+        "create_date": 1923,
+        "size": 232,
+        "owner": 1
+    },
+    "books": [
+        {
+            "id": 1,
+            "metabook": 1,
+            "language": 1,
+            "title": "Вечные мгновения",
+            "author": "1",
+            "translation_date": 1954,
+            "translator": 2,
+            "is_ready": true,
+            "is_visible": true,
+            "owner": 1
+        },
+        {
+            "id": 3,
+            "metabook": 1,
+            "language": 2,
+            "title": "Собачье сердце ",
+            "author": "Михаил Булгаков ",
+            "translation_date": 0,
+            "translator": 1,
+            "is_ready": true,
+            "is_visible": true,
+            "owner": 3
+        },
+        {
+            "id": 4,
+            "metabook": 1,
+            "language": 1,
+            "title": "The heart of a dog",
+            "author": "Michail Bulgakov",
+            "translation_date": 0,
+            "translator": 1,
+            "is_ready": false,
+            "is_visible": false,
+            "owner": 3
+        }
+    ],
+    "tags": []
+  }
+Status code 200/Ok - успешно
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+
+
+11. GET /metabookF2/:metabookId - Получение полной информации о метакниге (второй способ)
+
+Возвращает полную информацию о конкретной метакниге {json}
+  {
+    "metabook": {
+        "id": 1,
+        "author": 1,
+        "language": 1,
+        "title": "Вечные мгновения",
+        "create_date": 1923,
+        "size": 232,
+        "owner": 1
+    },
+    "books": [
+        {
+            "id": 1,
+            "metabook": 1,
+            "language": 1,
+            "title": "Вечные мгновения",
+            "author": "1",
+            "translation_date": 1954,
+            "translator": 2,
+            "is_ready": true,
+            "is_visible": true,
+            "owner": 1
+        },
+        {
+            "id": 3,
+            "metabook": 1,
+            "language": 2,
+            "title": "Собачье сердце ",
+            "author": "Михаил Булгаков ",
+            "translation_date": 0,
+            "translator": 1,
+            "is_ready": true,
+            "is_visible": true,
+            "owner": 3
+        },
+        {
+            "id": 4,
+            "metabook": 1,
+            "language": 1,
+            "title": "The heart of a dog",
+            "author": "Michail Bulgakov",
+            "translation_date": 0,
+            "translator": 1,
+            "is_ready": false,
+            "is_visible": false,
+            "owner": 3
+        }
+    ],
+    "tags": []
+  }
+Status code 200/Ok - успешно
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+  
+
+12. GET /metabooks - Получение списка метакниг
+
+Возвращает список всех метакниг в системе {json}
+ [
+  {
+  }
+ ]
+Status code 200/Ok - успешно
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+
+
+13. GET /version - Получение версии
+
+Возвращает версию системы
+"0.5.2"
+Status code 200/Ok - успешно
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+
+	
+14. GET /booksize/:book - Получение размера книги (глав)
+
+Возвращает размер указанной книги
+"Some(10)"
+Status code 200/Ok - успешно
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+	
+
+15. GET /notes/:book - Получение заметок книги
+
+Возвращает список заметок, связанных с указанной книгой {json}
+  [
+    {
+     "id": 1,
+     "book": 1,
+     "chapter": 1,
+     "txt": "страница 12"
+    }
+  ]
+Status code 200/Ok - успешно
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+
+	
+16. GET /tags/:metabook - Получение тегов метакниги
+
+Возвращает список тегов, связанных с указанной метакнигой {json}
+  [
+    {
+     "id": 1,
+     "owners_title": "Романтика",
+     "english_title": "Romance",
+     "russian_title": "Романтика",
+     "german_title": "Romanze",
+     "owners_description": "Все о романтики ",
+     "english_description": "It's all about romance",
+     "russian_description": "Все о романтики ",
+     "german_description": "Alles dreht sich um Romantik",
+     "colour": "#FF2348",
+     "owner": 1
+    }
+  ]
+Status code 200/Ok - успешно
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+
+	
+17. GET /pdf/:book - Получение PDF-версии книги
+
+Возвращает PDF-версию указанной книги
+
+??????
+
+Status code 200/Ok - успешно
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+
+
+18. GET /pdf2/:book1/:book2	Получение PDF-версии двух книг на разных языках
+
+Возвращает PDF-версию двух указанных книг
+
+??????
+
+Status code 200/Ok - успешно
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+
+	
+19. POST /reg - Регистрация нового пользователя.
+Body
+  {
+    "id": "3",
+    "login": "erty",
+    "password": "34525",
+    "firstname": "vsgdfg",
+    "surname": "Bsdfgasdfg",
+    "email": "xzavasv@gmail.com"
+  }
+Возвращает ответ "1"
+
+Status code 200/Ok - успешно
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+
