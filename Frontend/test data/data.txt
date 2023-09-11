@@ -1,2 +1,7 @@
-login 
-password
+baseURL: 'http://ec2-16-171-68-169.eu-north-1.compute.amazonaws.com:80' - удаленный сервер
+Login: 'Ваш ник в telegramm'
+Password: '123'
+
+baseURL: 'http://localhost:8080' - локальный сервер
+Login: 'из локальной БД'
+Password: 'из локальной БД'....
