@@ -1,19 +1,250 @@
-1. Авторизация пользователя  - POST /auth
-   Body
-   {
-      "login"": "Test",
-      "password"": "Test"
-   }
-	Возвращает конкретного пользователя
+1. POST /auth - Авторизация пользователя
+Body
+     {
+       "login": "login",
+       "password": "1234"
+     }
+
+Возвращает конкретного пользователя
     {
-      "id": 0,
-      "login": "login",
-      "password": "",
-      "token": "MRuXS….",
-      "role": "user",
-      "ts": "2023-08-31T13:34:02.907231700"
+       "id": 0,
+       "login": "login",
+       "password": "",
+       "token": "MRuXS….",
+       "role": "user",
+       "ts": "2023-08-31T13:34:02.907231700""
+     }
+Status code 200/Ok - успешно, token авторизации в теле ответа
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+				
+				
+				
+2. POST /admin/insertBook - Добавление записи в Books
+Body
+      {
+        "id": 1,
+        "metabook": 1,
+        "language": 1,
+        "title": "Вечные мгновения",
+        "author": "1",
+        "translation_date": 1954,
+        "translator": 2,
+        "is_ready": true,
+        "is_visible": true,
+        "owner": 1
+      }
+Возвращает ответ  "1"
+
+Status code 200/Ok - успешно, запись в БД создана
+Status code 400/   - ошибка авторизации
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+				
+				
+				
+3. POST /admin/insertNotes - Добавление записи в Notes
+Body
+   [
+     {
+       "id": 4,
+       "book": 2,
+       "chapter": 1,
+       "txt"": "заметки"
+     },
+     {
+       "id": 5,
+       "book": 2,
+       "chapter": 2,
+       "txt": "заметки"
+     }
+   ]
+
+Возвращает ответ  "2"
+
+Status code 200/Ok - успешно, запись в БД создана
+Status code 400/   - ошибка авторизации
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+								
+				
+				
+4. POST /admin/insertCreator - Добавление записи в Creators
+Body
+     {
+       "id": "4",
+       "english_name": "Author Name",
+       "russian_name": "Имя автора",
+       "german_name": "Name des Autors",
+       "original_language": 1,
+       "birth_date": 1980,
+       "is_author": true,
+       "is_translator": false,
+       "owner": 1
+     }
+
+Возвращает ответ  "1"
+ 
+Status code 200/Ok - успешно, запись в БД создана
+Status code 400/   - ошибка авторизации
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+					                                                     
+				
+				
+				
+5. POST /admin/insertMetabook - Добавление записи в Metabooks
+Body
+    {
+      "id": "1",
+      "a uthor": "1",
+      "languag": "1",
+      "title": "Meta Book Title",
+      "create_date": "2000",
+      "size": "500",
+      "owner": "1"
     }
-Status code - 200/ok  -  успешная авторизация
-Status code - 500     -  ошибка авторизации
-Status code - 404     -  ошибка запроса
+
+Возвращает ответ  "1"
+                                                       
+Status code 200/Ok - успешно, запись в БД создана
+Status code 400/   - ошибка авторизации
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+			
+				
+
+6. POST /admin/insertChapter - Добавление записи в таблицу Chapters
+Body
+      {
+         "id": "6",
+         "book": "2",
+         "title": "sdcsdc",
+         "txt": "ыавиваывам"
+      }
+
+Возвращает ответ  "1"
+
+Status code 200/Ok - успешно, запись из БД удалена
+Status code 400/   - ошибка авторизации
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+   
+
+
+7. POST /admin/raw - Добавление записи в таблицу uploads
+Body
+      {
+        "id": "4",
+        "book": "4",
+        "txt": "книга 4"
+      }
+
+Возвращает ответ  "1"
+
+Status code 200/Ok - успешно, запись из БД удалена
+Status code 400/   - ошибка авторизации
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+
+
+				
+8. DELETE /admin/deleteCreator/:creator - Удаление записи из таблицы Creators
+Body  (нет)
+
+Возвращает ответ  "1"
+
+Status code 200/Ok - успешно, запись из БД удалена
+Status code 400/   - ошибка авторизации
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+                                                     
+				
+								
+9. DELETE /admin/deleteMetabook/:metabook - Удаление записи из таблицы Metabooks
+Body  (нет)
+
+Возвращает ответ  "1"
+				
+Status code 200/Ok - успешно, запись из БД удалена
+Status code 400/   - ошибка авторизации
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+
+			
+				
+10.DELETE /admin/deleteBook/:book - Удаление записи из таблицы Books
+Body  (нет)
+
+Возвращает ответ  "1"
+				
+Status code 200/Ok - успешно, запись из БД удалена
+Status code 400/   - ошибка авторизации
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+
+				
+				
+11. GET /admin/creators - Получение записей из таблицы Creators
+Body  (нет)
+Возвращает ответ
+
+ ""people"": [
+
+        {
+          "id": 1,
+          "english_name": "Joan Ramon Jimenez",
+          "russian_name": "Джоан Рамон Хименес",
+          "german_name": "Joan Ramon Jimenez",
+          "french_name": "Joan Ramon Jimenez",
+          "original_language": 1,
+          "birth_date": 1856,
+          "death_date": 1921,
+          "is_author": true,
+          "is_translator": true,
+          "owner": 1
+        }
+ ]
+				
+Status code 200/Ok - успешно, запись из БД удалена
+Status code 400/   - ошибка авторизации
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+
+				
+				
+12. GET /admin/books - Получение записей из таблицы Creators
+Body  (нет)
+
+Возвращает ответ
+      {
+         "library": []
+      }
+				
+Status code 200/Ok - успешно, запись из БД удалена
+Status code 400/   - ошибка авторизации
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
+
+				
+				
+13. GET /admin/metabooks - Получение записей из таблицы  Metabooks
+Body  (нет)
+
+Возвращает ответ
+
+      {
+        "id": 1,
+        "author": 1,
+        "language": 1,
+        "title": "Вечные мгновения",
+        "create_date": 1923,
+        "size": 232,
+        "owner": 1
+      }
+				
+Status code 200/Ok - успешно, запись из БД удалена
+Status code 400/   - ошибка авторизации
+Status code 404/   - ошибка запроса
+Status code 500/   - ошибка сервера
 
