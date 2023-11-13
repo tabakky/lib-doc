@@ -21,7 +21,8 @@ birth_date smallint,
 death_date smallint,
 is_author boolean,
 is_translator boolean,
-owner integer);
+owner integer,
+constraint unique_name_and_birth unique (english_name, birth_date));
 
 create table Metabooks (
 id integer primary key,
@@ -30,7 +31,8 @@ language smallint references Languages(id),
 title varchar,
 create_date smallint,
 size integer,
-owner integer);
+owner integer,
+constraint unique_title_for_author unique (author, title));
 
 create table Books (
 id integer primary key,
@@ -42,6 +44,7 @@ translation_date smallint,
 translator integer references Creators(id),
 is_ready boolean,
 is_visible boolean,
+is_deleted boolean default false,
 owner integer);
 
 create table Chapters (
@@ -92,12 +95,12 @@ str_size integer);
 
 create table users (
 id serial primary key,
-login varchar,
+login varchar unique,
 password varchar,
 firstname varchar,
 surname varchar,
-email varchar,
-tg varchar,
+email varchar unique,
+tg varchar unique,
 favBooks varchar,
 origlang varchar,
 langs varchar,
@@ -105,3 +108,23 @@ location varchar,
 token varchar,
 role varchar,
 ts varchar);
+
+create table downloads (
+id serial primary key,
+owner integer references users(id),
+leftbook integer references books(id),
+rightbook integer,
+download_time timestamp
+);
+
+create table booklists (
+id serial primary key,
+title varchar,
+description varchar,
+owner integer,
+is_visible boolean,
+add_time timestamp default now());
+
+create table books_in_lists (
+booklist integer references booklists(id),
+book integer references books(id));
