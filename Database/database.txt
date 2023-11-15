@@ -44,8 +44,8 @@ translation_date smallint,
 translator integer references Creators(id),
 is_ready boolean,
 is_visible boolean,
-is_deleted boolean default false,
-owner integer);
+owner integer,
+is_deleted boolean default false);
 
 create table Chapters (
 book integer references books(id),
